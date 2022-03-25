@@ -22,39 +22,6 @@ const ClerkFeatures = () => (
   </Link>
 );
 
-const SSRDemoLink = () => (
-  <Link href="/ssr-demo">
-    <a className={styles.cardContent}>
-      <img src="/icons/layout.svg" />
-      <div>
-        <h3>Visit the SSR demo page</h3>
-        <p>
-          See how Clerk hydrates the auth state during SSR and CSR, enabling server-side generation even for
-          authenticated pages
-        </p>
-      </div>
-      <div className={styles.arrow}>
-        <img src="/icons/arrow-right.svg" />
-      </div>
-    </a>
-  </Link>
-);
-
-const MiddlewareProtectedPageLink = () => (
-  <a href="/protected-pages">
-    <a className={styles.cardContent}>
-      <img src="/icons/layout.svg" />
-      <div>
-        <h3>Visit a page protected by _middleware</h3>
-        <p>Find out how you can use Nextjs middleware and Clerk stateless auth to protect entire routes at the edge</p>
-      </div>
-      <div className={styles.arrow}>
-        <img src="/icons/arrow-right.svg" />
-      </div>
-    </a>
-  </a>
-);
-
 const SignupLink = () => (
   <Link href="/sign-up">
     <a className={styles.cardContent}>
@@ -69,20 +36,6 @@ const SignupLink = () => (
     </a>
   </Link>
 );
-
-const apiSample = `
-import { withAuth } from "@clerk/nextjs/api";
-
-export default withAuth((req, res) => {
-  const { sessionId } = req.auth;
-
-  if (!sessionId) {
-    return res.status(401).json({ id: null });
-  }
-
-  return res.status(200).json({ id: sessionId });
-});
-`.trim();
 
 // Main component using <SignedIn> & <SignedOut>.
 //
@@ -101,35 +54,12 @@ const Main = () => (
           <ClerkFeatures />
         </div>
       </SignedIn>
-      <div className={styles.card}>
-        <SSRDemoLink />
-      </div>
-      <div className={styles.card}>
-        <MiddlewareProtectedPageLink />
-      </div>
       <SignedOut>
         <div className={styles.card}>
           <SignupLink />
         </div>
       </SignedOut>
-
-      <div className={styles.card}>
-        <Link href="https://dashboard.clerk.dev?utm_source=github&utm_medium=starter_repos&utm_campaign=nextjs_starter">
-          <a target="_blank" rel="noopener" className={styles.cardContent}>
-            <img src="/icons/settings.svg" />
-            <div>
-              <h3>Configure settings for your app</h3>
-              <p>Visit Clerk to manage instances and configure settings for user management, theme, and more</p>
-            </div>
-            <div className={styles.arrow}>
-              <img src="/icons/arrow-right.svg" />
-            </div>
-          </a>
-        </Link>
-      </div>
     </div>
-
-    <APIRequest />
 
     <div className={styles.links}>
       <Link href="https://docs.clerk.dev?utm_source=github&utm_medium=starter_repos&utm_campaign=nextjs_starter">
@@ -146,67 +76,11 @@ const Main = () => (
   </main>
 );
 
-const APIRequest = () => {
-  React.useEffect(() => {
-    if (window.Prism) {
-      window.Prism.highlightAll();
-    }
-  });
-  const [response, setResponse] = React.useState("// Click above to run the request");
-  const makeRequest = async () => {
-    setResponse("// Loading...");
-
-    try {
-      const res = await fetch("/api/getAuthenticatedUserId");
-      const body = await res.json();
-      setResponse(JSON.stringify(body, null, "  "));
-    } catch (e) {
-      setResponse("// There was an error with the request. Please contact support@clerk.dev");
-    }
-  };
-  return (
-    <div className={styles.backend}>
-      <h2>API request example</h2>
-      <div className={styles.card}>
-        <button target="_blank" rel="noopener" className={styles.cardContent} onClick={() => makeRequest()}>
-          <img src="/icons/server.svg" />
-          <div>
-            <h3>fetch('/api/getAuthenticatedUserId')</h3>
-            <p>Retrieve the user ID of the signed in user, or null if there is no user</p>
-          </div>
-          <div className={styles.arrow}>
-            <img src="/icons/download.svg" />
-          </div>
-        </button>
-      </div>
-      <h4>
-        Response
-        <em>
-          <SignedIn>You are signed in, so the request will return your user ID</SignedIn>
-          <SignedOut>You are signed out, so the request will return null</SignedOut>
-        </em>
-      </h4>
-      <pre>
-        <code className="language-js">{response}</code>
-      </pre>
-      <h4>pages/api/getAuthenticatedUserId.js</h4>
-      <pre>
-        <code className="language-js">{apiSample}</code>
-      </pre>
-    </div>
-  );
-};
-
 // Footer component
 const Footer = () => (
   <footer className={styles.footer}>
-    Powered by{" "}
-    <a href="https://clerk.dev?utm_source=github&utm_medium=starter_repos&utm_campaign=nextjs_starter" target="_blank">
-      <img src="/clerk.svg" alt="Clerk.dev" className={styles.logo} />
-    </a>
-    +
-    <a href="https://nextjs.org/" target="_blank" rel="noopener">
-      <img src="/nextjs.svg" alt="Next.js" className={styles.logo} />
+    <a href="https://seizeer.com/" target="_blank" rel="noopener">
+      Test App
     </a>
   </footer>
 );
@@ -214,8 +88,8 @@ const Footer = () => (
 const Home = () => (
   <div className={styles.container}>
     <Head>
-      <title>Create Next App</title>
-      <link rel="icon" href="/favicon.ico" />
+      <title>Test App</title>
+      <link rel="icon" href="/favicon.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     </Head>
     <Main />

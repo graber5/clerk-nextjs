@@ -31,6 +31,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #151515;
+  font-weight: bold;
 }
 
 .title a {
@@ -146,7 +148,7 @@
 }
 
 .link {
-  color: #335bf1;
+  color: #151515;
   font-weight: 600;
 }
 
@@ -214,7 +216,7 @@
   }
 
   .linkText:hover {
-    border-bottom: 2px solid #335bf1;
+    border-bottom: 2px solid #151515;
   }
 }
 
